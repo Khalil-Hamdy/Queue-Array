@@ -1,32 +1,164 @@
-# Prerequisites
-*.d
+#include<iostream>
+#include<string>
+#define size 5
+using namespace std;
+class queue
+{
+private:
+    int rear;
+    int fron;
+    int arr[size];
+public:
+    queue()
+    {
+        rear = -1;
+        fron = -1;
+    }
+    void add(int f)
+    {
+        if (((rear == size - 1) && (fron == 0)) || (fron == rear + 1))
+        {
+            cout << "the queue is full!\n";
+        }
+        else if (fron == -1)
+        {
+            fron = 0;
+            rear = 0;
+            arr[0]=f;
+        }
+        else if (rear == size - 1)
+        {
+            rear = 0;
+            arr[rear]=f;
+        }
+        else
+        {
+            rear = rear + 1;
+            arr[rear]=f;
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+        }
+    }
+    void dil()
+    {
+        if (fron == -1)
+        {
+            cout << "the queue is empety!\n";
+        }
+        else if (fron == rear)
+        {
+            fron = -1;
+            rear = -1;
+        }
+        else if (fron == size - 1)
+        {
+            fron = 0;
+        }
+        else
+        {
+            fron = fron + 1;
+        }
+    }
+    void show()
+    {
 
-# Precompiled Headers
-*.gch
-*.pch
+        if (fron == -1)
+        {
+            cout << "the queue is empety!\n";
+        }
+        else if (fron == rear + 1)
+        {
+            for (int i = fron; i < size; i++)
+            {
+                cout << endl << arr[i];
+            }
+            for (int a = 0; a < fron; a++)
+            {
+                cout << endl << arr[a];
+            }
+        }
+        else if ((rear == size - 1) && (fron == 0))
+        {
+            for (int i = fron; i <= rear; i++)
+            {
+                cout << "\n" << arr[i];
+            }
+        }
+        else
+        {
+            for (int w = fron; w <= rear; w++)
+            {
+                cout << endl << arr[w];
+            }
+        }
+    }
+};
+int main()
+{
+    queue d;
+    int q, w, e,f,g;
+    string s = "yes";
+    while (s == "yes")
+    {
+        cout << "1-to add number : \n";
+        cout << "2-to remove number : \n";
+        cout << "3-to show data : \n";
+        cin >> q;
+        switch (q)
+        {
+        case(1):
+            cout << "how many number that is you enter : ";
+            cin >> w;
+            for (int i = 0; i < w; i++)
+            {
+                cout << "\nenter number "<<i+1<<" : ";
+                cin >> e;
+                d.add(e);
+            }
+            break;
+        case(2):
+            cout << "\nhow many number that is you remove : ";
+            cin >> f;
+            for (int i = 0; i < f; i++)
+            {
+                d.dil();
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+            }
+        case(3):
+            d.show();
+            break;
+        default:
+            cout << "\ntry again : \n";
+            s = "yes";
+        }
+        cout << "\ndo you want try again : "<<"\n1-yes"<<"\n2-no\n";
+        cin >> g;
+        if (g == 1)
+        {
+            s = "yes";
+        }
+        else if(g==2)
+        {
+            cout << "\nthe end";
+            s = "no\n";
+        }
+        else
+        {
+            while (g > 2 || g < 1)
+            {
+                cout << "\ntry again " << "\n1-yes" << "\n2-no\n";
+                cin >> g;
+                if (g == 1)
+                {
+                    s = "yes";
+                }
+                else if (g == 2)
+                {
+                    cout << "\nthe end";
+                    s = "no\n";
+                }
+            }
+        }
+    }
+    return 0;
+}
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
